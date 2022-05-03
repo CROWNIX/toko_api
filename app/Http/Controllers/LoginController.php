@@ -6,6 +6,7 @@ use App\Models\Login;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller{
     public function login(Request $request){
@@ -24,7 +25,7 @@ class LoginController extends Controller{
 
         $login = Login::create([
             "member_id" => $member->id,
-            "auth_key" => $this->RandomString()
+            "auth_key" => Str::random(100)
         ]);
 
         if(!$login){
