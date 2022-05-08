@@ -33,9 +33,9 @@ class ProdukController extends Controller{
     }
 
     public function update(Request $request, $id){
-        $kodeProduk = $request->input("kode_produk");
-        $namaProduk = $request->input("nama_produk");
-        $harga = $request->input("harga");
+        $kodeProduk = request("kode_produk");
+        $namaProduk = request("nama_produk");
+        $harga = request("harga");
 
         $produk = Produk::findOrFail($id);
         $result = $produk->update([
