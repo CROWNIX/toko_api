@@ -11,9 +11,9 @@ class ProdukController extends Controller{
         $namaProduk = request("nama_produk");
         $harga = request("harga");
 
-        if($request->hasFile("photo")){
-            $fileName = $request->file("photo")->getClientOriginalName();
-            $request->file("photo")->move("uploads", $fileName);
+        if($request->hasFile("gambar_produk")){
+            $fileName = $request->file("gambar_produk")->getClientOriginalName();
+            $request->file("gambar_produk")->move("uploads", $fileName);
         }
         
         $produk = Produk::create([
