@@ -5,17 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use illuminate\Http\Request;
 
-class ProdukController extends Controller{
-    public function create(Request $request){
+class ProdukController extends Controller
+{
+    public function create(Request $request)
+    {
         $kodeProduk = request("kode_produk");
         $namaProduk = request("nama_produk");
         $harga = request("harga");
+        $fileName = request("gambar_produk");
 
-        if($request->hasFile("gambar_produk")){
-            $fileName = $request->file("gambar_produk")->getClientOriginalName();
-            $request->file("gambar_produk")->move("uploads", $fileName);
-        }
-        
         $produk = Produk::create([
             "kode_produk" => $kodeProduk,
             "nama_produk" => $namaProduk,
@@ -26,19 +24,22 @@ class ProdukController extends Controller{
         return $this->responseHasil(200, true, $produk);
     }
 
-    public function list(){
+    public function list()
+    {
         $produk = Produk::all();
 
         return $this->responseHasil(200, true, $produk);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $produk = Produk::findOrFail($id);
 
         return $this->responseHasil(200, true, $produk);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $kodeProduk = request("kode_produk");
         $namaProduk = request("nama_produk");
         $harga = request("harga");
@@ -55,7 +56,8 @@ class ProdukController extends Controller{
         return $this->responseHasil(200, true, $result);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $produk = Produk::findOrFail($id);
         $delete = $produk->delete();
 
