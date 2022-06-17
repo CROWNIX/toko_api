@@ -10,11 +10,17 @@ class ProdukController extends Controller{
         $kodeProduk = request("kode_produk");
         $namaProduk = request("nama_produk");
         $harga = request("harga");
+
+        if($request->hasFile("photo")){
+            $fileName = $request->file("photo")->getClientOriginalName();
+            $request->file("photo")->move("uploads", $fileName);
+        }
         
         $produk = Produk::create([
             "kode_produk" => $kodeProduk,
             "nama_produk" => $namaProduk,
-            "harga" => $harga
+            "harga" => $harga,
+            "gambar_produk" => $fileName
         ]);
 
         return $this->responseHasil(200, true, $produk);
