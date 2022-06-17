@@ -10,7 +10,7 @@ class ProdukController extends Controller{
         $kodeProduk = request("kode_produk");
         $namaProduk = request("nama_produk");
         $harga = request("harga");
-
+        
         $produk = Produk::create([
             "kode_produk" => $kodeProduk,
             "nama_produk" => $namaProduk,
@@ -36,12 +36,14 @@ class ProdukController extends Controller{
         $kodeProduk = request("kode_produk");
         $namaProduk = request("nama_produk");
         $harga = request("harga");
+        $gambarProduk = request("gambar_produk");
 
         $produk = Produk::findOrFail($id);
         $result = $produk->update([
             "kode_produk" => $kodeProduk,
             "nama_produk" => $namaProduk,
-            "harga" => $harga
+            "harga" => $harga,
+            "gambar_produk" => $gambarProduk
         ]);
 
         return $this->responseHasil(200, true, $result);
