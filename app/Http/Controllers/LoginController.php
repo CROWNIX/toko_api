@@ -8,18 +8,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class LoginController extends Controller{
-    public function login(Request $request){
+class LoginController extends Controller
+{
+    public function login(Request $request)
+    {
         $email = $request->input("email");
         $password = $request->input("password");
 
         $member = Member::query()->firstWhere(["email" => $email]);
 
-        if($member == null){
-            return $this->responseHasil(400, false, "Email tidak ditemukan");
+        if ($member == null) {
+            return $this->responseHasil(404, false, "Email tidak ditemukan");
         }
 
-        if(!Hash::check($password, $member->password)){
+        if (!Hash::check($password, $member->password)) {
             return $this->responseHasil(400, false, "Password tidak valid");
         }
 
@@ -28,7 +30,7 @@ class LoginController extends Controller{
             "auth_key" => Str::random(100)
         ]);
 
-        if(!$login){
+        if (!$login) {
             return $this->responseHasil(401, false, "Unauthorized");
         }
 
