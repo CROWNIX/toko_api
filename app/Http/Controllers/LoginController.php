@@ -42,7 +42,8 @@ class LoginController extends Controller
             "token" => $login->auth_key,
             "user" => [
                 "id" => $member->id,
-                "email" => $member->email
+                "email" => $member->email,
+                "role" => $member->role,
             ]
         ];
 

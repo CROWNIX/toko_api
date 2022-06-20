@@ -12,12 +12,14 @@ class RegistrasiController extends Controller
     {
         $nama = $request->input("nama");
         $email = $request->input("email");
+        $role = $request->input("role");
         $password = Hash::make($request->input("password"));
 
         try {
             Registrasi::create([
                 "nama" => $nama,
                 "email" => $email,
+                "role" => $role,
                 "password" => $password
             ]);
         } catch (\Exception $e) {
