@@ -14,11 +14,15 @@ class LoginController extends Controller
     {
         $email = $request->input("email");
         $password = $request->input("password");
+        try {
+            $member = Member::query()->firstWhere(["email" => $email]);
+        } catch (\Exception $e) {
+            return $this->responseHasil(500, false, $e->getPrevious()->getMessage());
+        }
 
-        $member = Member::query()->firstWhere(["email" => $email]);
 
         if ($member == null) {
-            return $this->responseHasil(404, false, "Email tidak ditemukan");
+            return $this->responseHasil(404, false, "Email tidak terdaftar");
         }
 
         if (!Hash::check($password, $member->password)) {

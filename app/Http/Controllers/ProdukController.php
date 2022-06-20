@@ -16,28 +16,40 @@ class ProdukController extends Controller
         $kategori = request("kategori");
         $fileName = request("gambar_produk");
 
-        $produk = Produk::create([
-            "kode_produk" => $kodeProduk,
-            "nama_produk" => $namaProduk,
-            "harga" => $harga,
-            "deskripsi" => $deskripsi,
-            "kategori" => $kategori,
-            "gambar_produk" => $fileName
-        ]);
+        try {
+            $produk = Produk::create([
+                "kode_produk" => $kodeProduk,
+                "nama_produk" => $namaProduk,
+                "harga" => $harga,
+                "deskripsi" => $deskripsi,
+                "kategori" => $kategori,
+                "gambar_produk" => $fileName
+            ]);
+        } catch (\Exception $e) {
+            return $this->responseHasil(500, false, $e->getPrevious()->getMessage());
+        }
 
         return $this->responseHasil(200, true, $produk);
     }
 
     public function list()
     {
-        $produk = Produk::all();
+        try {
+            $produk = Produk::all();
+        } catch (\Exception $e) {
+            return $this->responseHasil(500, false, $e->getPrevious()->getMessage());
+        }
 
         return $this->responseHasil(200, true, $produk);
     }
 
     public function show($id)
     {
-        $produk = Produk::findOrFail($id);
+        try {
+            $produk = Produk::findOrFail($id);
+        } catch (\Exception $e) {
+            return $this->responseHasil(500, false, $e->getPrevious()->getMessage());
+        }
 
         return $this->responseHasil(200, true, $produk);
     }
@@ -51,7 +63,11 @@ class ProdukController extends Controller
         $kategori = request("kategori");
         $fileName = request("gambar_produk");
 
-        $produk = Produk::findOrFail($id);
+        try {
+            $produk = Produk::findOrFail($id);
+        } catch (\Exception $e) {
+            return $this->responseHasil(500, false, $e->getPrevious()->getMessage());
+        }
         $result = $produk->update([
             "kode_produk" => $kodeProduk,
             "nama_produk" => $namaProduk,
@@ -68,7 +84,10 @@ class ProdukController extends Controller
     {
         $produk = Produk::findOrFail($id);
         $delete = $produk->delete();
-
-        return $this->responseHasil(200, true, $delete);
+        try {
+            return $this->responseHasil(200, true, $delete);
+        } catch (\Exception $e) {
+            return $this->responseHasil(500, false, $e->getPrevious()->getMessage());
+        }
     }
 }
