@@ -34,10 +34,6 @@ class LoginController extends Controller
             "auth_key" => Str::random(100)
         ]);
 
-        if (!$login) {
-            return $this->responseHasil(401, false, "Unauthorized");
-        }
-
         $data = [
             "token" => $login->auth_key,
             "user" => [

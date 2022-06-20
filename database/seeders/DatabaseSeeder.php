@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Registrasi;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        Registrasi::create([
+            "nama" => "syahrul",
+            "email" => "syahrul@gmail.com",
+            "role" => "admin",
+            "password" => "123456"
+        ]);
+
+        Registrasi::create([
+            "nama" => "yesi",
+            "email" => "yesi@gmail.com",
+            "role" => "member",
+            "password" => "123456"
+        ]);
     }
 }

@@ -25,6 +25,6 @@ $router->group(["prefix" => "produk"], function ($router) {
     $router->post("", ["uses" => "ProdukController@create"]);
     $router->get("/", ["uses" => "ProdukController@list"]);
     $router->get("/{id}", ["uses" => "ProdukController@show"]);
-    $router->post("/{id}/update", ["uses" => "ProdukController@update"]);
+    $router->put("/{id}", ["uses" => "ProdukController@update"]);
     $router->delete("/{id}", ["uses" => "ProdukController@delete"]);
 });
