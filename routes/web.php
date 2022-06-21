@@ -28,3 +28,10 @@ $router->group(["prefix" => "produk"], function ($router) {
     $router->put("/{id}", ["uses" => "ProdukController@update"]);
     $router->delete("/{id}", ["uses" => "ProdukController@delete"]);
 });
+
+$router->group(["prefix" => "users"], function ($router) {
+    $router->get("", ["uses" => "UserController@list"]);
+    $router->get("/{id}", ["uses" => "UserController@show"]);
+    $router->put("/{id}", ["uses" => "UserController@update"]);
+    $router->delete("/{id}", ["uses" => "UserController@delete"]);
+});

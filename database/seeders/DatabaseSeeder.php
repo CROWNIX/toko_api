@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Registrasi;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,17 +17,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Registrasi::create([
-            "nama" => "syahrul",
-            "email" => "syahrul@gmail.com",
+            "nama" => "admin toko",
+            "email" => "admintoko@gmail.com",
             "role" => "admin",
-            "password" => "123456"
+            "password" => Hash::make("123456")
         ]);
 
         Registrasi::create([
-            "nama" => "yesi",
-            "email" => "yesi@gmail.com",
+            "nama" => "syahrul",
+            "email" => "syahrul@gmail.com",
             "role" => "member",
-            "password" => "123456"
+            "password" => Hash::make("123456")
         ]);
     }
 }
